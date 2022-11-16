@@ -1,0 +1,29 @@
+name: Checkmarx One Scan
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Checkmarx AST CLI Action
+        uses: checkmarx/ast-github-action@main
+        with:
+          base_uri: https://ast.checkmarx.net
+          cx_tenant: rw_demo
+          cx_client_id: ${{ secrets.CLIENT_ID }}
+          cx_client_secret: ${{ secrets.SECRET }}
+          # project_name: # optional, default is ${{ github.repository }}
+          # branch: # optional, default is ${{ github.head_ref || github.ref }}
+          # additional_params: --project-tags GitHub,Goats,Pipeline # --file-filter !readme --report-format sarif --output-name results
+          # additional_params: --file-filter !readme --report-format sarif --output-name results
+          additional_params: --report-format sarif --output-path .
+      - name: Upload SARIF file
+        uses: github/codeql-action/upload-sarif@v1
+        with:
+          # Path to SARIF file relative to the root of the repository
+          sarif_file: cx_result.sarif
