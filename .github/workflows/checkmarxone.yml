@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@vmain
       - name: Checkmarx AST CLI Action
         uses: checkmarx/ast-github-action@main
         with:
@@ -21,9 +21,3 @@ jobs:
           # branch: # optional, default is ${{ github.head_ref || github.ref }}
           # additional_params: --project-tags GitHub,Goats,Pipeline # --file-filter !readme --report-format sarif --output-name results
           # additional_params: --file-filter !readme --report-format sarif --output-name results
-      #    additional_params: --report-format sarif --output-path .
-      #- name: Upload SARIF file
-      #  uses: github/codeql-action/upload-sarif@v1
-      #  with:
-          # Path to SARIF file relative to the root of the repository
-      #    sarif_file: cx_result.sarif
