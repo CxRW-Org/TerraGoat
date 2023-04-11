@@ -17,7 +17,4 @@ jobs:
           cx_tenant: rw_demo
           cx_client_id: ${{ secrets.CLIENT_ID }}
           cx_client_secret: ${{ secrets.SECRET }}
-          # project_name: # optional, default is ${{ github.repository }}
-          # branch: # optional, default is ${{ github.head_ref || github.ref }}
-          # additional_params: --project-tags GitHub,Goats,Pipeline # --file-filter !readme --report-format sarif --output-name results
-          # additional_params: --file-filter !readme --report-format sarif --output-name results
+          additional_params: --scan-types iac-security
